@@ -15,6 +15,15 @@ function ClientMainPage(props) {
                         <Link href={`/clients/${item.id}`}>{item.name}</Link> 
                     </li>
                 ))}
+                <h2>Alternative way to add  links</h2>
+                {clientData.map((item) => (
+                    <li key={item.id}>
+                        <Link href={{
+                            pathname: 'clients/[id]',
+                            query:{id: item.id }
+                        }}>{item.name}</Link> 
+                    </li>
+                ))}
             </ul>
         </div>
     )
