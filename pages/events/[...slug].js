@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+
 
 function FilterdEventsPage(props) {
     return (
@@ -7,10 +6,6 @@ function FilterdEventsPage(props) {
             
         </div>
     )
-}
-
-FilterdEventsPage.propTypes = {
-
 }
 
 export default FilterdEventsPage
