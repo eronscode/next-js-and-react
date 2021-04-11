@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-function index(props) {
+function HomePage(props) {
   return (
     <div>
       <h1>Homepage</h1>
@@ -12,5 +12,5 @@ function index(props) {
     </div>
   )
 }
-export default index
+export default HomePage
 
