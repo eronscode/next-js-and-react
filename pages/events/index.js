@@ -1,4 +1,5 @@
 import EventList from "../../components/events/events-list"
+import EventSearch from "../../components/events/events-search"
 import { getAllEvents } from "../../dummy-data"
 
 function AllEventsPage(props) {
@@ -6,9 +7,10 @@ function AllEventsPage(props) {
 
     return (
         <>
-            <div>
-                <EventList events={allEvents} />
-            </div>
+            
+            <EventSearch/>
+            <EventList events={allEvents} />
+            
         </>
     )
 }
