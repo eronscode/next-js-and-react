@@ -1,7 +1,7 @@
 export default function PortfolioPage() {
     return (
         <div>
-            <h1>MAIN PAGE</h1>
+            <h1>PortFolio Main Page</h1>
         </div>
     )
 }
