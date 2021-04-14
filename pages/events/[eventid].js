@@ -4,15 +4,15 @@ import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import ButtonLink from '../../components/ui/ButtonLink';
 import ErrorAlert from '../../components/ui/error-alert/error-alert';
-import { getEventById } from "../../dummy-data";
+import { getAllEvents, getEventById } from '../../helpers/api-util';
 
 
 function EventSinglePage(props) {
-    const router = useRouter();
-    const eventId = router.query.eventid
-    const singleEvent = getEventById(eventId)
+    // const router = useRouter();
+    // const eventId = router.query.eventid
+    const {selectedEvent} = props
     
-    if(!singleEvent){
+    if(!selectedEvent){
         return <>
             <ErrorAlert><h4 className="center">Event Cannot be found!</h4></ErrorAlert>
             <div className="center">
@@ -21,7 +21,7 @@ function EventSinglePage(props) {
         </>
     }
 
-    const {title, date, location, image, description} = singleEvent
+    const {title, date, location, image, description} = selectedEvent
 
     return (
         <>
@@ -37,6 +37,28 @@ function EventSinglePage(props) {
             </EventContent>
         </>
     )
+}
+
+export async function getStaticProps(context){
+    const eventId = context.params.eventid;
+
+    const event = await getEventById(eventId)
+    return{
+        props:{
+            selectedEvent: event
+        }
+    }
+}
+
+export async function getStaticPaths(){
+    
+    const data = await getAllEvents()
+    const FilteredPaths = data.map(event => ({params:{eventid: event.id}}))
+
+    return{
+        paths: FilteredPaths,
+        fallback:false
+    }
 }
 
 export default EventSinglePage

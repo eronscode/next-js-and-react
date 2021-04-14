@@ -20,3 +20,8 @@ export async function getFeaturedEvents(){
     return allevents.filter((event) => event.isFeatured);
 
 }
+
+export async function getEventById(id) {
+    const allevents =  await getAllEvents();
+    return allevents.find((event) => event.id === id);
+}
