@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect,useState } from "react";
 import useSWR from 'swr'
@@ -76,6 +77,13 @@ function FilterdEventsPage(props) {
 
     return (
         <>
+            <Head>
+                <title>Filtered Events for {year}/{month} </title>
+                <meta 
+                name="description"
+                content={`All events for ${year}/${month}`}
+                />
+            </Head>
             <ResultsTitle date={dateObj}/>
             <EventList events={filteredEvents} />
         </>

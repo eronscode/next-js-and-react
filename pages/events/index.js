@@ -1,4 +1,6 @@
 import { useRouter } from "next/router"
+import Head from 'next/head';
+
 import EventList from "../../components/events/events-list"
 import EventSearch from "../../components/events/events-search"
 import { getAllEvents } from "../../helpers/api-util";
@@ -14,9 +16,16 @@ function AllEventsPage(props) {
 
     return (
         <>
+        <Head>
+            <title>Nextjs Events - Sample Test App</title>
+            <meta 
+            name="description"
+            content="An events listing sample app built with next js"
+            />
+        </Head>
             
-            <EventSearch onSearch={onSearch}/>
-            <EventList events={events} />
+        <EventSearch onSearch={onSearch}/>
+        <EventList events={events} />
             
         </>
     )

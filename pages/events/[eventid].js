@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import {useRouter} from 'next/router'
 import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
@@ -25,6 +26,13 @@ function EventSinglePage(props) {
 
     return (
         <>
+            <Head>
+                <title>{title} - Nextjs Events</title>
+                <meta 
+                name="description"
+                content={`${title} - ${description}`}
+                />
+            </Head>
             <EventSummary title={title} />
             <EventLogistics 
                 date={date}
