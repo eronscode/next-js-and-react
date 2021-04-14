@@ -29,6 +29,36 @@ const DUMMY_EVENTS = [
       image: 'images/extrovert-event.jpg',
       isFeatured: true,
     },
+    {
+        id: 'e4',
+        title: 'Networking for extroverts',
+        description:
+          'You probably need no help with networking in general. But focusing your energy correctly - that is something where most people can improve.',
+        location: 'My Street 12, 10115 Broke City',
+        date: '2022-04-10',
+        image: 'images/extrovert-event.jpg',
+        isFeatured: true,
+      },
+      {
+        id: 'e5',
+        title: 'Networking for extroverts',
+        description:
+          'You probably need no help with networking in general. But focusing your energy correctly - that is something where most people can improve.',
+        location: 'My Street 12, 10115 Broke City',
+        date: '2022-04-10',
+        image: 'images/extrovert-event.jpg',
+        isFeatured: true,
+      },
+      {
+        id: 'e6',
+        title: 'Networking for extroverts',
+        description:
+          'You probably need no help with networking in general. But focusing your energy correctly - that is something where most people can improve.',
+        location: 'My Street 12, 10115 Broke City',
+        date: '2022-04-10',
+        image: 'images/extrovert-event.jpg',
+        isFeatured: true,
+      }, 
   ];
   
   export function getFeaturedEvents() {
