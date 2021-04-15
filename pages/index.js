@@ -12,7 +12,7 @@ function HomePage(props) {
         <title>Nextjs Events - Sample Test App</title>
         <meta 
           name="description"
-          content="A sample nextjs app built by dev ose"
+          content="An events listing sample app built with next js"
          />
       </Head>
 

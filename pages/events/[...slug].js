@@ -28,9 +28,22 @@ function FilterdEventsPage(props) {
             setLoadedEvents(events)
         }
     },[data])
+
+    let pageHeadData = (
+        <Head>
+            <title>Filtered Events  </title>
+            <meta 
+            name="description"
+            content={`Filtered events`}
+            />
+        </Head>
+    )
     
     if(!loadedEvents){
-        return <p className="center">Loading...</p>
+        return <>
+        {pageHeadData}
+        <p className="center">Loading...</p>
+        </>
     }
 
     const year = filterData[0]
@@ -52,6 +65,7 @@ function FilterdEventsPage(props) {
         error
     ){
         return <>
+            {pageHeadData}
             <ErrorAlert><p className="center">Invalid Url. Please check your url and try again</p></ErrorAlert>
             <div className="center">
                 <ButtonLink link='/events'>Show all events</ButtonLink>
@@ -66,6 +80,7 @@ function FilterdEventsPage(props) {
 
     if(!filteredEvents || filteredEvents.length === 0) 
         return <>
+            {pageHeadData}
             <ErrorAlert><p className='center'> No events found </p></ErrorAlert>
             <div className="center">
                 <ButtonLink link='/events'>Show all events</ButtonLink>
@@ -75,15 +90,19 @@ function FilterdEventsPage(props) {
 
     const dateObj = new Date(numYear, numMonth-1);
 
+    pageHeadData = (
+        <Head>
+            <title>Filtered Events for {numYear}/{numMonth} </title>
+            <meta 
+            name="description"
+            content={`All events for ${numYear}/${numMonth}`}
+            />
+        </Head>
+    )
+
     return (
         <>
-            <Head>
-                <title>Filtered Events for {year}/{month} </title>
-                <meta 
-                name="description"
-                content={`All events for ${year}/${month}`}
-                />
-            </Head>
+            {pageHeadData}
             <ResultsTitle date={dateObj}/>
             <EventList events={filteredEvents} />
         </>
