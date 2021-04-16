@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
+import Comments from '../../components/input/comments';
 import ButtonLink from '../../components/ui/ButtonLink';
 import ErrorAlert from '../../components/ui/error-alert/error-alert';
 import { getAllEvents, getEventById, getFeaturedEvents } from '../../helpers/api-util';
@@ -26,7 +27,7 @@ function EventSinglePage(props) {
         </>
     }
 
-    const {title, date, location, image, description} = selectedEvent
+    const {id, title, date, location, image, description} = selectedEvent
 
     return (
         <>
@@ -47,6 +48,7 @@ function EventSinglePage(props) {
             <EventContent>
                 <p>{description}</p>
             </EventContent>
+            <Comments eventId={id} />
         </>
     )
 }
