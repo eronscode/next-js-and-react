@@ -9,11 +9,15 @@ import { getAllEvents, getEventById, getFeaturedEvents } from '../../helpers/api
 
 
 function EventSinglePage(props) {
-    // const router = useRouter();
+    const router = useRouter();
     // const eventId = router.query.eventid
-    const {selectedEvent} = props
+    const {selectedEvent, hasError} = props;
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
     
-    if(!selectedEvent){
+    if(!selectedEvent || hasError){
         return <>
             <ErrorAlert><h4 className="center">Event Cannot be found!</h4></ErrorAlert>
             <div className="center">
@@ -51,11 +55,19 @@ export async function getStaticProps(context){
     const eventId = context.params.eventid;
 
     const event = await getEventById(eventId)
+    if(!event){
+        return{
+            props:{
+                hasError: true
+            }
+        }
+    }
+
     return{
         props:{
             selectedEvent: event
         },
-        revalidate:30
+        revalidate:1
     }
 }
 

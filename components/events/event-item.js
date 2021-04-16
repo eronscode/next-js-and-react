@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
 import DateIcon from "../icons/date-icon";
@@ -6,6 +7,7 @@ import ButtonLink from "../ui/ButtonLink";
 import classes from './event-item.module.css'
 
 function EventItem(props) {
+    const [isImageReady, setIsImageReady] = useState(false)
     const {title, image, date, location, id} = props;
     const transformedDate = new Date(date).toDateString('en-US', {
         day: 'numeric',
@@ -13,11 +15,17 @@ function EventItem(props) {
         year: 'numeric'
     })
     const transFormedAddress = location.replace(', ', '\n');
-    const explorelink = `/events/${id}`
+    const explorelink = `/events/${id}`;
+
+    const onLoadCallBack = (e)=>{
+        setIsImageReady(true)
+        typeof onLoad === "function" && onLoad(e)
+    }
 
     return (
         <li className={classes.item}>
-            <Image src={'/'+image} alt={title} width={260}  height={160}/>
+            {!isImageReady && 'loading image...'}
+            <Image onLoad={onLoadCallBack} src={'/'+image} alt={title} width={260}  height={160}/>
             <div className={classes.content}>
                 <div className={classes.summary}>
                     <h2>{title}</h2>

@@ -3,8 +3,11 @@ import AddressIcon from '../icons/address-icon';
 import DateIcon from '../icons/date-icon';
 import LogisticsItem from './logistics-item';
 import classes from './event-logistics.module.css';
+import { useState } from 'react';
 
 function EventLogistics(props) {
+  
+  const [isImageReady, setIsImageReady] = useState(false)
   const { date, address, image, imageAlt } = props;
 
   const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
@@ -13,11 +16,16 @@ function EventLogistics(props) {
     year: 'numeric',
   });
   const addressText = address.replace(', ', '\n');
+  const onLoadCallBack = (e)=>{
+    setIsImageReady(true)
+    typeof onLoad === "function" && onLoad(e)
+  }
 
   return (
     <section className={classes.logistics}>
       <div className={classes.image}>
-        <Image src={`/${image}`} alt={imageAlt} width={400} height={400} />
+        {!isImageReady && <p>loading image...</p>}
+        <Image onLoad={onLoadCallBack} src={`/${image}`} alt={imageAlt} width={400} height={400} />
         
       </div>
       <ul className={classes.list}>
