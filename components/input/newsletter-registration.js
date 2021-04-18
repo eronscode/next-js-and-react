@@ -35,8 +35,7 @@ function NewsletterRegistration() {
       emailInputRef.current.value = ''
       setMessage({...message, type:'success', message: data.message})
     }).catch(function(error) {
-      console.log(error);
-      setMessage({...message, type:'success', message: 'An error occured'})
+      setMessage({...message, type:'error', message: 'An error occured'})
     });
 
   }
