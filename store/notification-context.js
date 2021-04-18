@@ -1,4 +1,4 @@
-import {createContext} from 'react';
+import {createContext, useState} from 'react';
 
 const NotificationContext = createContext({
     notification:null,
@@ -8,8 +8,25 @@ const NotificationContext = createContext({
 
 
 export function NotificationContextProvider(props){
+
+    const [notification, setNotification] = useState(null);
+
+    function showNotificationHandler(notificationData) {
+        setNotification(notificationData)
+    }
+
+    function hideNotificationHandler(notificationData) {
+        setNotification(null)
+    }
+
+    const context = {
+        notification: notification,
+        showNotification: showNotificationHandler,
+        hideNotification: hideNotificationHandler
+    }
+
     return(
-        <NotificationContext.Provider>
+        <NotificationContext.Provider value={context}>
             {props.children}
         </NotificationContext.Provider>
     )

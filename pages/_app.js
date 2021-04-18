@@ -6,13 +6,13 @@ import '../styles/globals.css'
 function MyApp({ Component, pageProps }) {
   return <NotificationContextProvider>
     <Layout>
-      <Component {...pageProps} />
-      <Notification
-        title=""
-        status=""
-        message=""
-      />
-  </Layout>
+        <Component {...pageProps} />
+        <Notification
+          title=""
+          status=""
+          message=""
+        />
+    </Layout>
   </NotificationContextProvider>
   
 }
