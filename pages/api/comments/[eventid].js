@@ -26,7 +26,12 @@ async function handler(req, res) {
     }
 
     if(req.method === 'GET'){
-        
+        const db = client.db();
+        const result = await db.collection('comments')
+        .find()
+        .sort({_id: -1})
+        .toArray();
+        res.status(201).json({comments: result})
     }
 
     client.close();
