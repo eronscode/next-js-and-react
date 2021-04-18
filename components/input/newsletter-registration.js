@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
+import NotificationContext from '../../store/notification-context';
 import classes from './newsletter-registration.module.css';
 
 function NewsletterRegistration() {
   
   const emailInputRef = useRef();
   const [loading, setLoading] = useState(false);
-  const [message, setMessage]= useState({type:'', message:''})
+  const notificationCtx = useContext(NotificationContext)
 
   
 
@@ -21,26 +22,48 @@ function NewsletterRegistration() {
     // fetch user input (state or refs)
     // optional: validate input
     // send valid data to API
-    setMessage({type:'',message:''})
     setLoading(true)
+    notificationCtx.showNotification({
+      title:'Signing up...',
+      message:'Register for newsletter',
+      status:'pending'
+    })
     fetch('/api/newsletter',{
       method:'POST',
       body: JSON.stringify(payload),
       headers:{
         'Content-Type': 'application/json'
       }
-    }).then((response) => response.json()).then((data) => {
+    }).then((response) =>{
+      if(response.ok){
+        return response.json()
+      }
+
+      return response.json().then((data) => {
+        setLoading(false)
+        throw new Error(data.message || 'An error occured')
+      })
+
+    }).then((data) => {
       setLoading(false)
       console.log(data)
       emailInputRef.current.value = ''
-      setMessage({...message, type:'success', message: data.message})
+      notificationCtx.showNotification({
+        title:'Success!',
+        message:'Registration Successful',
+        status:'success'
+      })
     }).catch(function(error) {
-      setMessage({...message, type:'error', message: 'An error occured'})
+      setLoading(false)
+      notificationCtx.showNotification({
+        title:'Error!',
+        message: error.message || 'Some error occured',
+        status:'error'
+      })
     });
 
   }
 
-  console.log(message)
 
   return (
     <section className={classes.newsletter}>
@@ -58,7 +81,6 @@ function NewsletterRegistration() {
         </div>
       </form>
       <div>
-      <p style={{color: message.type === 'success'? 'green':'red'}}>{message.message}</p>
       </div>
     </section>
   );
